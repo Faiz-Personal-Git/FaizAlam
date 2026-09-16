@@ -1,42 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   ArrowRight,
   Play,
   Menu,
   X,
-  Plus,
 } from "lucide-react";
-
 import "./App.css";
 
-const model = {
-  hero: "/model/01-hero.jpg",
-  portrait: "/model/02-portrait.jpg",
-  fitness: "/model/03-fitness.jpg",
-  fashion: "/model/04-fashion-editorial.jpg",
-  street: "/model/05-streetwear.jpg",
-  lifestyle: "/model/06-lifestyle.jpg",
-  travel: "/model/07-travel.jpg",
-  film: "/model/08-film.jpg",
-  campaign: "/model/09-brand-campaign.jpg",
-  backstage: "/model/10-backstage.jpg",
-  blackWhite: "/model/11-black-white.jpg",
-  casual: "/model/12-casual.jpg",
-};
+/* =====================================================
+   HIGH QUALITY WEB IMAGES
+   ===================================================== */
 
-const contextImages = {
-  city:
-    "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1800&q=90",
+const images = {
+  hero:
+    "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=2400&q=95",
+
+  portrait:
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1800&q=95",
+
+  fashion:
+    "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2000&q=95",
+
+  street:
+    "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2000&q=95",
+
+  fitness:
+    "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2000&q=95",
+
+  lifestyle:
+    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1800&q=95",
+
+  film:
+    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=1800&q=95",
+
+  travel:
+    "https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=2000&q=95",
+
+  backstage:
+    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=95",
+
+  blackWhite:
+    "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=2000&q=95",
 
   hotel:
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=90",
-
-  camera:
-    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1600&q=90",
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=95",
 
   architecture:
-    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=90",
+    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=95",
+
+  camera:
+    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1800&q=95",
 };
 
 const work = [
@@ -45,28 +59,28 @@ const work = [
     title: "NOIR",
     category: "FASHION",
     year: "SS26",
-    image: model.fashion,
+    image: images.fashion,
   },
   {
     number: "02",
     title: "AFTER DARK",
     category: "FILM",
     year: "2026",
-    image: model.film,
+    image: images.film,
   },
   {
     number: "03",
     title: "URBAN FORM",
     category: "CAMPAIGN",
     year: "2026",
-    image: model.street,
+    image: images.street,
   },
   {
     number: "04",
     title: "OFF DUTY",
     category: "LIFESTYLE",
     year: "2026",
-    image: model.casual,
+    image: images.lifestyle,
   },
 ];
 
@@ -76,7 +90,7 @@ const identities = {
     title: "THE\nFASHION\nSIDE.",
     text:
       "Editorials, campaigns and commercial work built around strong visual presence, movement and character.",
-    image: model.fashion,
+    image: images.fashion,
     tags: ["Editorial", "Commercial", "Runway"],
   },
 
@@ -85,7 +99,7 @@ const identities = {
     title: "THE\nSTORY\nSIDE.",
     text:
       "Character-driven work for films, music videos, branded content and visual storytelling.",
-    image: model.film,
+    image: images.film,
     tags: ["Film", "Character", "Music Video"],
   },
 
@@ -94,40 +108,407 @@ const identities = {
     title: "THE\nDIGITAL\nSIDE.",
     text:
       "Social-first content combining personality, lifestyle, fashion and brand storytelling.",
-    image: model.lifestyle,
+    image: images.lifestyle,
     tags: ["Instagram", "YouTube", "Brands"],
   },
 };
 
+function AnimatedCounter({
+  end,
+  suffix = "",
+  decimals = 0,
+  duration = 1800,
+}) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const element = counterRef.current;
+
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.35,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+
+    let startTime = null;
+    let animationFrame;
+
+    const animate = (timestamp) => {
+      if (!startTime) {
+        startTime = timestamp;
+      }
+
+      const progress = Math.min(
+        (timestamp - startTime) / duration,
+        1
+      );
+
+      // Smooth ease-out
+      const eased =
+        1 - Math.pow(1 - progress, 4);
+
+      const value = eased * end;
+
+      setCount(value);
+
+      if (progress < 1) {
+        animationFrame =
+          requestAnimationFrame(animate);
+      } else {
+        setCount(end);
+      }
+    };
+
+    animationFrame =
+      requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [started, end, duration]);
+
+  return (
+    <strong ref={counterRef}>
+      {count.toFixed(decimals)}
+      {suffix}
+    </strong>
+  );
+}
+
 function App() {
+  const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [identity, setIdentity] = useState("model");
 
+  const cursor = useRef(null);
+  const cursorRing = useRef(null);
+
   const activeIdentity = identities[identity];
+
+  /* =====================================================
+     LOADER + SCROLL REVEALS
+     ===================================================== */
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1200);
+
+    const revealItems = document.querySelectorAll(
+      ".reveal, .reveal-left, .reveal-right, .image-reveal"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, []);
+
+  /* =====================================================
+     CUSTOM CURSOR
+     ===================================================== */
+
+  useEffect(() => {
+    if (window.innerWidth <= 900) return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let ringX = 0;
+    let ringY = 0;
+
+    const move = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (cursor.current) {
+        cursor.current.style.transform = `
+          translate3d(${mouseX}px, ${mouseY}px, 0)
+        `;
+      }
+    };
+
+    const animateRing = () => {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+
+      if (cursorRing.current) {
+        cursorRing.current.style.transform = `
+          translate3d(${ringX}px, ${ringY}px, 0)
+        `;
+      }
+
+      requestAnimationFrame(animateRing);
+    };
+
+    const enter = (e) => {
+      const type = e.currentTarget.dataset.cursor;
+
+      cursor.current?.classList.add("cursor-hover");
+      cursorRing.current?.classList.add("cursor-ring-hover");
+
+      if (cursor.current) {
+        cursor.current.dataset.label = type || "VIEW";
+      }
+    };
+
+    const leave = () => {
+      cursor.current?.classList.remove("cursor-hover");
+      cursorRing.current?.classList.remove("cursor-ring-hover");
+
+      if (cursor.current) {
+        cursor.current.dataset.label = "";
+      }
+    };
+
+    document.addEventListener("mousemove", move);
+
+    const interactive = document.querySelectorAll(
+      "a, button, .work-item, .platform-card, .story-grid > div, .brand-feature"
+    );
+
+    interactive.forEach((item) => {
+      item.addEventListener("mouseenter", enter);
+      item.addEventListener("mouseleave", leave);
+    });
+
+    animateRing();
+
+    return () => {
+      document.removeEventListener("mousemove", move);
+
+      interactive.forEach((item) => {
+        item.removeEventListener("mouseenter", enter);
+        item.removeEventListener("mouseleave", leave);
+      });
+    };
+  }, [loading]);
+
+  /* =====================================================
+     SCROLL PARALLAX
+     ===================================================== */
+
+  useEffect(() => {
+    const progress = document.querySelector(".scroll-progress");
+
+    const update = () => {
+      const scrollTop = window.scrollY;
+      const total =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (progress && total > 0) {
+        progress.style.width = `${(scrollTop / total) * 100}%`;
+      }
+
+      const heroImage = document.querySelector(".hero-background img");
+
+      if (heroImage && window.innerWidth > 700) {
+        heroImage.style.transform = `
+          scale(1.06)
+          translateY(${scrollTop * 0.045}px)
+        `;
+      }
+    };
+
+    window.addEventListener("scroll", update, {
+      passive: true,
+    });
+
+    update();
+
+    return () =>
+      window.removeEventListener("scroll", update);
+  }, []);
+
+  /* =====================================================
+     MOUSE IMAGE PARALLAX
+     ===================================================== */
+
+  useEffect(() => {
+    const items = document.querySelectorAll("[data-parallax]");
+
+    const move = (e) => {
+      if (window.innerWidth < 900) return;
+
+      const x =
+        (e.clientX / window.innerWidth - 0.5) * 2;
+
+      const y =
+        (e.clientY / window.innerHeight - 0.5) * 2;
+
+      items.forEach((item) => {
+        const amount =
+          Number(item.dataset.parallax) || 8;
+
+        item.style.transform = `
+          translate3d(
+            ${x * amount}px,
+            ${y * amount}px,
+            0
+          )
+        `;
+      });
+    };
+
+    window.addEventListener("mousemove", move);
+
+    return () =>
+      window.removeEventListener("mousemove", move);
+  }, []);
+
+  /* =====================================================
+     IMAGE TILT
+     ===================================================== */
+
+  useEffect(() => {
+    const cards =
+      document.querySelectorAll(".tilt-card");
+
+    cards.forEach((card) => {
+      const move = (e) => {
+        if (window.innerWidth < 900) return;
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const x =
+          (e.clientX - rect.left) /
+          rect.width -
+          0.5;
+
+        const y =
+          (e.clientY - rect.top) /
+          rect.height -
+          0.5;
+
+        card.style.transform = `
+          perspective(900px)
+          rotateX(${y * -3}deg)
+          rotateY(${x * 3}deg)
+          translateY(-6px)
+        `;
+      };
+
+      const leave = () => {
+        card.style.transform = "";
+      };
+
+      card.addEventListener("mousemove", move);
+      card.addEventListener("mouseleave", leave);
+    });
+  }, [loading]);
 
   const scrollTo = (id) => {
     setMenuOpen(false);
 
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    document
+      .getElementById(id)
+      ?.scrollIntoView({
+        behavior: "smooth",
+      });
   };
 
   return (
     <main className="site">
 
-      {/* =====================================================
-          NAVIGATION
-      ===================================================== */}
+      {/* =================================================
+          LOADER
+      ================================================= */}
+
+      <div
+        className={`page-loader ${loading ? "loading" : "loaded"
+          }`}
+      >
+        <div className="loader-top">
+          <span>FA / 26</span>
+          <span>CREATIVE ARCHIVE</span>
+        </div>
+
+        <div className="loader-center">
+          <strong>FAIZ</strong>
+          <span>ALAM</span>
+        </div>
+
+        <div className="loader-bottom">
+          <span>LOADING VISUAL SYSTEM</span>
+          <span>00 — 100</span>
+        </div>
+      </div>
+
+      {/* =================================================
+          SCROLL PROGRESS
+      ================================================= */}
+
+      <div className="scroll-progress" />
+
+      {/* =================================================
+          CUSTOM CURSOR
+      ================================================= */}
+
+      <div ref={cursorRing} className="cursor-ring" />
+
+      <div
+        ref={cursor}
+        className="custom-cursor"
+        data-label=""
+      >
+        <span />
+      </div>
+
+      {/* =================================================
+          NAVBAR
+      ================================================= */}
 
       <nav className="topbar">
 
         <button
-          className="logo"
+          className="brand-mark"
+          data-cursor="HOME"
           onClick={() => scrollTo("home")}
         >
-          FA<span>/</span>
+          <div className="brand-box">
+            <span>F</span>
+            <span>A</span>
+            <i />
+          </div>
+
+          <div className="brand-word">
+            <strong>FAIZ ALAM</strong>
+            <small>MODEL / ACTOR / CREATOR</small>
+          </div>
         </button>
 
         <div className="topbar-center">
@@ -138,9 +519,14 @@ function App() {
 
         <button
           className="menu-button"
-          onClick={() => setMenuOpen(!menuOpen)}
+          data-cursor="MENU"
+          onClick={() =>
+            setMenuOpen(!menuOpen)
+          }
         >
-          <span>{menuOpen ? "CLOSE" : "MENU"}</span>
+          <span>
+            {menuOpen ? "CLOSE" : "MENU"}
+          </span>
 
           {menuOpen ? (
             <X size={17} />
@@ -148,93 +534,87 @@ function App() {
             <Menu size={17} />
           )}
         </button>
-
       </nav>
 
-      {/* =====================================================
-          FULL MENU
-      ===================================================== */}
+      {/* =================================================
+          MENU
+      ================================================= */}
 
-      {menuOpen && (
-        <div className="menu-overlay">
-
-          <div className="menu-number">
-            NAVIGATION / 00
-          </div>
-
-          <div className="menu-links">
-
-            <button onClick={() => scrollTo("home")}>
-              <span>01</span>
-              HOME
-            </button>
-
-            <button onClick={() => scrollTo("about")}>
-              <span>02</span>
-              ABOUT
-            </button>
-
-            <button onClick={() => scrollTo("work")}>
-              <span>03</span>
-              WORK
-            </button>
-
-            <button onClick={() => scrollTo("social")}>
-              <span>04</span>
-              SOCIAL
-            </button>
-
-            <button onClick={() => scrollTo("contact")}>
-              <span>05</span>
-              CONTACT
-            </button>
-
-          </div>
-
-          <div className="menu-footer">
-            <span>INDIA</span>
-            <span>AVAILABLE WORLDWIDE</span>
-          </div>
-
+      <div
+        className={`menu-overlay ${menuOpen ? "menu-open" : ""
+          }`}
+      >
+        <div className="menu-number">
+          NAVIGATION / 00
         </div>
-      )}
 
-      {/* =====================================================
+        <div className="menu-links">
+          {[
+            ["01", "HOME", "home"],
+            ["02", "ABOUT", "about"],
+            ["03", "WORK", "work"],
+            ["04", "SOCIAL", "social"],
+            ["05", "CONTACT", "contact"],
+          ].map(([number, label, id], index) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
+              style={{
+                "--menu-delay": `${index * 70}ms`,
+              }}
+            >
+              <span>{number}</span>
+              {label}
+              <ArrowUpRight size={24} />
+            </button>
+          ))}
+        </div>
+
+        <div className="menu-footer">
+          <span>INDIA</span>
+          <span>AVAILABLE WORLDWIDE</span>
+        </div>
+      </div>
+
+      {/* =================================================
           HERO
-      ===================================================== */}
+      ================================================= */}
 
       <section className="hero" id="home">
 
         <div className="hero-background">
-          <img src={model.hero} alt="Faiz Alam fictional model" />
+          <img
+            src={images.hero}
+            alt="Fashion editorial"
+          />
         </div>
 
+        <div className="hero-glow" />
         <div className="hero-grain" />
+        <div className="hero-grid" />
 
-        <div className="hero-location">
+        <div className="hero-location reveal">
           <span>IND / 30.37° N</span>
           <span>77.05° E</span>
         </div>
 
-        <div className="hero-index">
+        <div className="hero-index reveal">
           <span>PORTFOLIO</span>
           <strong>01</strong>
         </div>
 
-        <div className="hero-social">
-
-          <a href="#instagram">
+        <div className="hero-social reveal-right">
+          <a href="#instagram" data-cursor="IG">
             IG
           </a>
 
-          <a href="#youtube">
+          <a href="#youtube" data-cursor="YT">
             YT
           </a>
 
-          <a href="#facebook">
+          <a href="#facebook" data-cursor="FB">
             FB
           </a>
-
         </div>
 
         <div className="hero-content">
@@ -244,74 +624,61 @@ function App() {
             REPRESENTING A NEW GENERATION
           </div>
 
-          <h1>
-            FAIZ
-            <br />
-            <span>ALAM</span>
+          <h1 className="hero-title">
+            <span className="hero-line">
+              FAIZ
+            </span>
+
+            <span className="hero-line outline-line">
+              ALAM
+            </span>
           </h1>
 
           <div className="hero-description">
 
             <p>
               Model / Actor / Digital Creator
+              <br />
+              Fashion / Film / Culture
             </p>
 
             <button
-              onClick={() => scrollTo("work")}
+              className="primary-button"
+              data-cursor="OPEN"
+              onClick={() =>
+                scrollTo("work")
+              }
             >
               VIEW SELECTED WORK
               <ArrowRight size={17} />
             </button>
 
           </div>
-
         </div>
 
         <div className="hero-bottom">
-
-          <span>
-            FASHION
-          </span>
-
-          <span>
-            FILM
-          </span>
-
-          <span>
-            CULTURE
-          </span>
-
-          <span>
-            DIGITAL
-          </span>
-
+          <span>FASHION</span>
+          <span>FILM</span>
+          <span>CULTURE</span>
+          <span>DIGITAL</span>
         </div>
-
-        <button
-          className="hero-scroll"
-          onClick={() => scrollTo("about")}
-        >
-          <span>SCROLL</span>
-          <ArrowRight size={15} />
-        </button>
 
       </section>
 
-      {/* =====================================================
-          INTRO
-      ===================================================== */}
+      {/* =================================================
+          ABOUT
+      ================================================= */}
 
       <section className="intro" id="about">
 
-        <div className="section-label">
+        <div className="section-label reveal">
           <span>02</span>
           <span>ABOUT / IDENTITY</span>
         </div>
 
         <div className="intro-layout">
 
-          <div className="intro-title">
-
+          <div className="intro-title reveal-left">
             <span className="small-label">
               NOT JUST A FACE.
             </span>
@@ -322,9 +689,10 @@ function App() {
               <i>the frame.</i>
             </h2>
 
+            <div className="title-line" />
           </div>
 
-          <div className="intro-copy">
+          <div className="intro-copy reveal-right">
 
             <p className="intro-lead">
               A contemporary model and digital
@@ -365,21 +733,29 @@ function App() {
 
         <div className="intro-visual">
 
-          <div className="intro-image-main">
+          <div
+            className="intro-image-main image-reveal tilt-card"
+            data-parallax="7"
+          >
             <img
-              src={model.portrait}
+              src={images.portrait}
               alt="Portrait"
             />
 
             <span className="image-corner">
               ARCHIVE / 002
             </span>
+
+            <div className="image-scan" />
           </div>
 
-          <div className="intro-image-small">
+          <div
+            className="intro-image-small image-reveal"
+            data-parallax="-10"
+          >
             <img
-              src={contextImages.architecture}
-              alt="Modern architecture"
+              src={images.architecture}
+              alt="Architecture"
             />
 
             <span>
@@ -397,13 +773,13 @@ function App() {
 
       </section>
 
-      {/* =====================================================
-          IDENTITY SWITCHER
-      ===================================================== */}
+      {/* =================================================
+          IDENTITY
+      ================================================= */}
 
       <section className="identity-section">
 
-        <div className="identity-top">
+        <div className="identity-top reveal">
 
           <div className="section-label light-label">
             <span>03</span>
@@ -420,32 +796,36 @@ function App() {
 
         <div className="identity-selector">
 
-          {Object.keys(identities).map((key) => (
+          {Object.keys(identities).map(
+            (key) => (
+              <button
+                key={key}
+                className={`identity-tab ${identity === key
+                  ? "selected"
+                  : ""
+                  }`}
+                onClick={() =>
+                  setIdentity(key)
+                }
+              >
+                <span>
+                  {identities[key].label}
+                </span>
 
-            <button
-              key={key}
-              className={identity === key ? "selected" : ""}
-              onClick={() => setIdentity(key)}
-            >
-              <span>
-                {identities[key].label}
-              </span>
+                <strong>{key}</strong>
 
-              <strong>
-                {key}
-              </strong>
+                <ArrowUpRight size={18} />
 
-              <ArrowUpRight size={18} />
-
-            </button>
-
-          ))}
+                <i />
+              </button>
+            )
+          )}
 
         </div>
 
         <div className="identity-stage">
 
-          <div className="identity-photo">
+          <div className="identity-photo image-reveal">
 
             <img
               key={activeIdentity.image}
@@ -465,32 +845,54 @@ function App() {
               {activeIdentity.label}
             </span>
 
-            <h2>
+            <h2 key={activeIdentity.title}>
               {activeIdentity.title
                 .split("\n")
                 .map((line, index) => (
-                  <React.Fragment key={line}>
-                    {line}
+                  <React.Fragment
+                    key={`${line}-${index}`}
+                  >
+                    <span
+                      className="identity-line"
+                      style={{
+                        "--line-delay": `${index * 90
+                          }ms`,
+                      }}
+                    >
+                      {line}
+                    </span>
+
                     {index !== 2 && <br />}
                   </React.Fragment>
                 ))}
             </h2>
 
-            <p>
+            <p className="identity-description">
               {activeIdentity.text}
             </p>
 
             <div className="identity-tags">
 
-              {activeIdentity.tags.map((tag) => (
-                <span key={tag}>
-                  {tag}
-                </span>
-              ))}
+              {activeIdentity.tags.map(
+                (tag, index) => (
+                  <span
+                    key={tag}
+                    style={{
+                      "--tag-delay": `${index * 70
+                        }ms`,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                )
+              )}
 
             </div>
 
-            <button className="circle-link">
+            <button
+              className="circle-link"
+              data-cursor="OPEN"
+            >
               <ArrowUpRight size={20} />
             </button>
 
@@ -500,80 +902,118 @@ function App() {
 
       </section>
 
-      {/* =====================================================
+      {/* =================================================
           NUMBERS
-      ===================================================== */}
+      ================================================= */}
 
       <section className="numbers">
 
-        <div className="section-label">
+        <div className="section-label reveal">
           <span>04</span>
           <span>BY THE NUMBERS</span>
         </div>
 
         <div className="numbers-grid">
 
-          <div className="number-item">
-            <strong>24</strong>
+          {/* 24 CITIES */}
+          <div className="number-item reveal">
+            <AnimatedCounter
+              end={24}
+              duration={1400}
+            />
+
             <span>CITIES</span>
-            <p>Travel / Shoots / Events</p>
+
+            <p>
+              Travel / Shoots / Events
+            </p>
           </div>
 
-          <div className="number-item">
-            <strong>680K</strong>
+
+          {/* 680K YOUTUBE */}
+          <div className="number-item reveal">
+            <AnimatedCounter
+              end={680}
+              suffix="K"
+              duration={1800}
+            />
+
             <span>YOUTUBE</span>
-            <p>Digital audience</p>
+
+            <p>
+              Digital audience
+            </p>
           </div>
 
-          <div className="number-item">
-            <strong>2.4M</strong>
+
+          {/* 2.4M INSTAGRAM */}
+          <div className="number-item reveal">
+            <AnimatedCounter
+              end={2.4}
+              suffix="M"
+              decimals={1}
+              duration={2000}
+            />
+
             <span>INSTAGRAM</span>
-            <p>Social community</p>
+
+            <p>
+              Social community
+            </p>
           </div>
 
-          <div className="number-item">
-            <strong>03</strong>
+
+          {/* 03 DISCIPLINES */}
+          <div className="number-item reveal">
+            <AnimatedCounter
+              end={3}
+              duration={1200}
+            />
+
             <span>DISCIPLINES</span>
-            <p>Model / Actor / Creator</p>
+
+            <p>
+              Model / Actor / Creator
+            </p>
           </div>
 
         </div>
 
       </section>
 
-      {/* =====================================================
-          SELECTED WORK
-      ===================================================== */}
+      {/* =================================================
+          COMPACT RECENT PROJECTS
+      ================================================= */}
 
       <section className="work-section" id="work">
 
         <div className="work-header">
 
-          <div className="section-label">
+          <div className="section-label reveal">
             <span>05</span>
             <span>SELECTED WORK</span>
           </div>
 
-          <h2>
+          <h2 className="reveal-left">
             RECENT
             <br />
             <i>PROJECTS.</i>
           </h2>
 
-          <p>
-            A fictional selection of campaigns,
-            editorials and visual stories.
+          <p className="reveal-right">
+            Campaigns, editorials and visual
+            stories.
           </p>
 
         </div>
 
-        <div className="work-list">
+        <div className="work-grid">
 
-          {work.map((item) => (
-
+          {work.map((item, index) => (
             <article
-              className="work-item"
+              className="work-item tilt-card image-reveal"
               key={item.number}
+              data-cursor="VIEW"
             >
 
               <div className="work-image">
@@ -583,198 +1023,160 @@ function App() {
                   alt={item.title}
                 />
 
-                <div className="work-image-overlay">
-
+                <div className="work-overlay">
                   <span>
-                    OPEN PROJECT
+                    {item.category}
                   </span>
 
-                  <ArrowUpRight size={18} />
-
+                  <div>
+                    <ArrowUpRight size={17} />
+                  </div>
                 </div>
+
+                <span className="work-number">
+                  {item.number}
+                </span>
 
               </div>
 
               <div className="work-meta">
 
-                <span>
-                  {item.number}
-                </span>
-
                 <div>
-
-                  <span>
+                  <small>
                     {item.category}
-                  </span>
+                  </small>
 
-                  <h3>
-                    {item.title}
-                  </h3>
-
+                  <h3>{item.title}</h3>
                 </div>
 
-                <span>
-                  {item.year}
-                </span>
+                <span>{item.year}</span>
 
               </div>
 
             </article>
-
           ))}
 
         </div>
 
+        <div className="work-more reveal">
+          <span>MORE PROJECTS</span>
+          <ArrowRight size={17} />
+        </div>
+
       </section>
 
-      {/* =====================================================
-          SOCIAL WORLD
-      ===================================================== */}
+      {/* =================================================
+          SOCIAL
+      ================================================= */}
 
       <section className="social-section" id="social">
 
         <div className="social-heading">
 
-          <div className="section-label light-label">
+          <div className="section-label light-label reveal">
             <span>06</span>
             <span>DIGITAL WORLD</span>
           </div>
 
-          <h2>
+          <h2 className="reveal-left">
             THE
             <br />
             <i>FEED.</i>
           </h2>
 
-          <p>
-            The portfolio lives on screen too.
+          <p className="reveal-right">
+            The portfolio
+            <br />
+            lives on screen too.
           </p>
 
         </div>
 
         <div className="social-platforms">
 
-          {/* INSTAGRAM */}
-
           <a
-            className="platform-card instagram"
+            className="platform-card instagram image-reveal"
             id="instagram"
             href="#"
+            data-cursor="INSTAGRAM"
           >
-
             <div className="platform-top">
-
               <span className="platform-symbol">
                 ◎
               </span>
-
-              <span>
-                INSTAGRAM
-              </span>
-
+              <span>INSTAGRAM</span>
               <ArrowUpRight size={18} />
-
             </div>
 
             <div className="platform-content">
-
-              <strong>
-                2.4M
-              </strong>
-
-              <span>
-                FOLLOWERS
-              </span>
-
+              <strong>2.4M</strong>
+              <span>FOLLOWERS</span>
             </div>
 
             <img
-              src={model.lifestyle}
+              src={images.lifestyle}
               alt="Instagram"
             />
 
             <div className="platform-handle">
               @faizalam
             </div>
-
           </a>
 
-          {/* YOUTUBE */}
-
           <a
-            className="platform-card youtube"
+            className="platform-card youtube image-reveal"
             id="youtube"
             href="#"
+            data-cursor="YOUTUBE"
           >
-
             <div className="platform-top">
-
               <span className="platform-symbol">
                 ▶
               </span>
 
-              <span>
-                YOUTUBE
-              </span>
+              <span>YOUTUBE</span>
 
               <ArrowUpRight size={18} />
-
             </div>
 
             <div className="platform-content">
-
-              <strong>
-                680K
-              </strong>
-
-              <span>
-                SUBSCRIBERS
-              </span>
-
+              <strong>680K</strong>
+              <span>SUBSCRIBERS</span>
             </div>
 
             <img
-              src={model.film}
+              src={images.film}
               alt="YouTube"
             />
 
             <div className="play-button">
-              <Play size={18} fill="currentColor" />
+              <Play
+                size={18}
+                fill="currentColor"
+              />
             </div>
-
           </a>
 
-          {/* FACEBOOK */}
-
           <a
-            className="platform-card facebook"
+            className="platform-card facebook image-reveal"
             id="facebook"
             href="#"
+            data-cursor="FACEBOOK"
           >
-
             <div className="platform-top">
-
               <span className="platform-symbol">
                 f
               </span>
 
-              <span>
-                FACEBOOK
-              </span>
+              <span>FACEBOOK</span>
 
               <ArrowUpRight size={18} />
-
             </div>
 
             <div className="facebook-copy">
+              <strong>410K</strong>
 
-              <strong>
-                410K
-              </strong>
-
-              <span>
-                COMMUNITY
-              </span>
+              <span>COMMUNITY</span>
 
               <div />
 
@@ -785,43 +1187,27 @@ function App() {
                 <br />
                 EVENTS
               </p>
-
             </div>
-
           </a>
-
-        </div>
-
-        <div className="social-bottom">
-
-          <span>
-            FOLLOW THE PROCESS
-          </span>
-
-          <ArrowRight size={18} />
-
-          <span>
-            NOT JUST THE RESULT
-          </span>
 
         </div>
 
       </section>
 
-      {/* =====================================================
-          VISUAL STORY
-      ===================================================== */}
+      {/* =================================================
+          VISUAL DIARY
+      ================================================= */}
 
       <section className="story-section">
 
         <div className="story-heading">
 
-          <div className="section-label">
+          <div className="section-label reveal">
             <span>07</span>
             <span>VISUAL DIARY</span>
           </div>
 
-          <h2>
+          <h2 className="reveal-left">
             LIFE
             <br />
             <i>OFF CAMERA.</i>
@@ -831,10 +1217,12 @@ function App() {
 
         <div className="story-grid">
 
-          <div className="story-large">
-
+          <div
+            className="story-large image-reveal"
+            data-cursor="VIEW"
+          >
             <img
-              src={model.travel}
+              src={images.travel}
               alt="Travel"
             />
 
@@ -842,63 +1230,48 @@ function App() {
               <span>01</span>
               <strong>TRAVEL</strong>
             </div>
-
           </div>
 
-          <div className="story-tall">
-
+          <div
+            className="story-tall image-reveal"
+            data-cursor="VIEW"
+          >
             <img
-              src={contextImages.hotel}
+              src={images.hotel}
               alt="Hotel"
             />
 
             <span>
               PLACES / PEOPLE / MOMENTS
             </span>
-
           </div>
 
-          <div className="story-small">
-
+          <div
+            className="story-small image-reveal"
+            data-cursor="VIEW"
+          >
             <img
-              src={model.fitness}
+              src={images.fitness}
               alt="Fitness"
             />
 
-            <span>
-              DISCIPLINE
-            </span>
-
-          </div>
-
-          <div className="story-wide">
-
-            <img
-              src={model.backstage}
-              alt="Backstage"
-            />
-
-            <div>
-              <span>04</span>
-              <strong>BEHIND THE SCENES</strong>
-            </div>
-
+            <span>DISCIPLINE</span>
           </div>
 
         </div>
 
       </section>
 
-      {/* =====================================================
+      {/* =================================================
           PROCESS
-      ===================================================== */}
+      ================================================= */}
 
       <section className="process-section">
 
-        <div className="process-image">
+        <div className="process-image image-reveal">
 
           <img
-            src={contextImages.camera}
+            src={images.camera}
             alt="Camera"
           />
 
@@ -911,12 +1284,12 @@ function App() {
 
         <div className="process-copy">
 
-          <div className="section-label">
+          <div className="section-label reveal">
             <span>08</span>
             <span>PROCESS</span>
           </div>
 
-          <h2>
+          <h2 className="reveal-left">
             GOOD
             <br />
             WORK
@@ -932,25 +1305,23 @@ function App() {
 
           <div className="process-steps">
 
-            <div>
-              <span>01</span>
-              <strong>CONCEPT</strong>
-            </div>
-
-            <div>
-              <span>02</span>
-              <strong>PREP</strong>
-            </div>
-
-            <div>
-              <span>03</span>
-              <strong>SHOOT</strong>
-            </div>
-
-            <div>
-              <span>04</span>
-              <strong>DELIVER</strong>
-            </div>
+            {[
+              ["01", "CONCEPT"],
+              ["02", "PREP"],
+              ["03", "SHOOT"],
+              ["04", "DELIVER"],
+            ].map(
+              ([number, title]) => (
+                <div
+                  className="reveal"
+                  key={number}
+                >
+                  <span>{number}</span>
+                  <strong>{title}</strong>
+                  <ArrowRight size={14} />
+                </div>
+              )
+            )}
 
           </div>
 
@@ -958,13 +1329,16 @@ function App() {
 
       </section>
 
-      {/* =====================================================
-          BRANDS
-      ===================================================== */}
+      {/* =================================================
+          COLLABORATIONS
+      ================================================= */}
 
-      <section className="brands-section" id="collaborations">
+      <section
+        className="brands-section"
+        id="collaborations"
+      >
 
-        <div className="brands-topline">
+        <div className="brands-topline reveal">
           <span>09</span>
           <span>COLLABORATIONS</span>
           <span>2026</span>
@@ -972,17 +1346,17 @@ function App() {
 
         <div className="brands-intro">
 
-          <div className="brands-kicker">
+          <div className="brands-kicker reveal">
             WHO WE WORK WITH
           </div>
 
-          <h2>
+          <h2 className="reveal-left">
             BUILT
             <br />
             <i>TOGETHER.</i>
           </h2>
 
-          <p>
+          <p className="reveal">
             Fashion, automotive, hospitality,
             lifestyle and technology.
           </p>
@@ -991,59 +1365,61 @@ function App() {
 
         <div className="brand-showcase">
 
-          <div className="brand-feature">
-            <span>01</span>
-            <strong>MONARCH</strong>
-            <small>FASHION / CAMPAIGN</small>
-          </div>
-
-          <div className="brand-feature">
-            <span>02</span>
-            <strong>VANTAGE</strong>
-            <small>AUTOMOTIVE / DIGITAL</small>
-          </div>
-
-          <div className="brand-feature">
-            <span>03</span>
-            <strong>NOVA</strong>
-            <small>LIFESTYLE / SOCIAL</small>
-          </div>
-
-          <div className="brand-feature">
-            <span>04</span>
-            <strong>ATELIER 09</strong>
-            <small>FASHION / EDITORIAL</small>
-          </div>
-
-        </div>
-
-        <div className="brands-bottom">
-
-          <div className="brands-note">
-            <span>AVAILABLE FOR</span>
-            <strong>SELECT COLLABORATIONS</strong>
-          </div>
-
-          <div className="brands-arrow">
-            <ArrowUpRight size={20} />
-          </div>
+          {[
+            [
+              "01",
+              "MONARCH",
+              "FASHION / CAMPAIGN",
+            ],
+            [
+              "02",
+              "VANTAGE",
+              "AUTOMOTIVE / DIGITAL",
+            ],
+            [
+              "03",
+              "NOVA",
+              "LIFESTYLE / SOCIAL",
+            ],
+            [
+              "04",
+              "ATELIER 09",
+              "FASHION / EDITORIAL",
+            ],
+          ].map(
+            ([number, brand, category]) => (
+              <div
+                className="brand-feature reveal"
+                key={number}
+              >
+                <span>{number}</span>
+                <strong>{brand}</strong>
+                <small>{category}</small>
+                <ArrowUpRight size={17} />
+              </div>
+            )
+          )}
 
         </div>
 
       </section>
 
-      {/* =====================================================
+      {/* =================================================
           CONTACT
-      ===================================================== */}
+      ================================================= */}
 
-      <section className="contact-section" id="contact">
+      <section
+        className="contact-section"
+        id="contact"
+      >
 
         <img
-          src={model.blackWhite}
-          alt="Contact portrait"
+          src={images.blackWhite}
+          alt="Portrait"
         />
 
         <div className="contact-dark" />
+        <div className="contact-grid" />
 
         <div className="contact-number">
           10
@@ -1051,35 +1427,37 @@ function App() {
 
         <div className="contact-content">
 
-          <span>
+          <span className="reveal">
             AVAILABLE FOR SELECT PROJECTS
           </span>
 
-          <h2>
+          <h2 className="reveal-left">
             LET'S MAKE
             <br />
             SOMETHING
             <br />
-            <i>WORTH REMEMBERING.</i>
+            <i>
+              WORTH REMEMBERING.
+            </i>
           </h2>
 
           <a
             href="mailto:hello@faizalam.demo"
-            className="contact-link"
+            className="contact-link reveal"
+            data-cursor="MAIL"
           >
             <span>
               START A CONVERSATION
             </span>
 
             <ArrowUpRight size={20} />
-
           </a>
 
         </div>
 
         <div className="contact-footer">
 
-          <div>
+          <div className="footer-brand">
             FA<span>/</span>
           </div>
 
