@@ -16,41 +16,52 @@ const images = {
   hero:
     "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=2400&q=95",
 
-  portrait:
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1800&q=95",
-
-  fashion:
-    "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2000&q=95",
-
-  street:
-    "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2000&q=95",
-
-  fitness:
-    "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2000&q=95",
-
-  lifestyle:
-    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1800&q=95",
-
-  film:
-    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=1800&q=95",
-
-  travel:
-    "https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=2000&q=95",
-
-  backstage:
-    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=95",
-
-  blackWhite:
-    "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=2000&q=95",
-
-  hotel:
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=95",
+  aboutPortrait:
+    "https://cdn.pixabay.com/photo/2025/07/13/22/24/male-model-9712889_1280.jpg",
 
   architecture:
     "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=95",
 
-  camera:
-    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1800&q=95",
+  workFashion:
+    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=1800&q=95",
+
+  workFilm:
+    "https://cdn.pixabay.com/photo/2024/10/16/22/30/man-9126024_1280.jpg",
+
+  workStreet:
+    "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2000&q=95",
+
+  workLifestyle:
+    "https://cdn.pixabay.com/photo/2025/06/30/23/44/editorial-portrait-9689444_1280.jpg",
+
+  identityModel:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1800&q=95",
+
+  identityActor:
+    "https://cdn.pixabay.com/photo/2026/01/28/22/10/man-10093235_1280.jpg",
+
+  identityCreator:
+    "https://cdn.pixabay.com/photo/2025/07/11/06/44/male-model-9707882_1280.jpg",
+
+  instagram:
+    "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=2000&q=95",
+
+  youtube:
+    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=95",
+
+  travel:
+    "https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=2000&q=95",
+
+  hotel:
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=95",
+
+  fitness:
+    "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2000&q=95",
+
+  process:
+    "https://cdn.pixabay.com/photo/2022/04/15/22/30/behind-the-scenes-7135326_1280.jpg",
+
+  contact:
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=2000&q=95",
 };
 
 const work = [
@@ -59,56 +70,56 @@ const work = [
     title: "NOIR",
     category: "FASHION",
     year: "SS26",
-    image: images.fashion,
+    image: images.workFashion,
   },
   {
     number: "02",
     title: "AFTER DARK",
     category: "FILM",
     year: "2026",
-    image: images.film,
+    image: images.workFilm,
   },
   {
     number: "03",
     title: "URBAN FORM",
     category: "CAMPAIGN",
     year: "2026",
-    image: images.street,
+    image: images.workStreet,
   },
   {
     number: "04",
     title: "OFF DUTY",
     category: "LIFESTYLE",
     year: "2026",
-    image: images.lifestyle,
+    image: images.workLifestyle,
   },
 ];
 
 const identities = {
   model: {
     label: "01 / MODEL",
-    title: "THE\nFASHION\nSIDE.",
+    title: "THE FASHION SIDE.",
     text:
       "Editorials, campaigns and commercial work built around strong visual presence, movement and character.",
-    image: images.fashion,
+    image: images.identityModel,
     tags: ["Editorial", "Commercial", "Runway"],
   },
 
   actor: {
     label: "02 / ACTOR",
-    title: "THE\nSTORY\nSIDE.",
+    title: "THE STORY SIDE.",
     text:
       "Character-driven work for films, music videos, branded content and visual storytelling.",
-    image: images.film,
+    image: images.identityActor,
     tags: ["Film", "Character", "Music Video"],
   },
 
   creator: {
     label: "03 / CREATOR",
-    title: "THE\nDIGITAL\nSIDE.",
+    title: "THE DIGITAL SIDE.",
     text:
       "Social-first content combining personality, lifestyle, fashion and brand storytelling.",
-    image: images.lifestyle,
+    image: images.identityCreator,
     tags: ["Instagram", "YouTube", "Brands"],
   },
 };
@@ -121,12 +132,10 @@ function AnimatedCounter({
 }) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
-
   const counterRef = useRef(null);
 
   useEffect(() => {
     const element = counterRef.current;
-
     if (!element) return;
 
     const observer = new IntersectionObserver(
@@ -136,13 +145,10 @@ function AnimatedCounter({
           observer.disconnect();
         }
       },
-      {
-        threshold: 0.35,
-      }
+      { threshold: 0.35 }
     );
 
     observer.observe(element);
-
     return () => observer.disconnect();
   }, []);
 
@@ -153,37 +159,26 @@ function AnimatedCounter({
     let animationFrame;
 
     const animate = (timestamp) => {
-      if (!startTime) {
-        startTime = timestamp;
-      }
+      if (!startTime) startTime = timestamp;
 
       const progress = Math.min(
         (timestamp - startTime) / duration,
         1
       );
 
-      // Smooth ease-out
-      const eased =
-        1 - Math.pow(1 - progress, 4);
-
-      const value = eased * end;
-
-      setCount(value);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setCount(eased * end);
 
       if (progress < 1) {
-        animationFrame =
-          requestAnimationFrame(animate);
+        animationFrame = requestAnimationFrame(animate);
       } else {
         setCount(end);
       }
     };
 
-    animationFrame =
-      requestAnimationFrame(animate);
+    animationFrame = requestAnimationFrame(animate);
 
-    return () => {
-      cancelAnimationFrame(animationFrame);
-    };
+    return () => cancelAnimationFrame(animationFrame);
   }, [started, end, duration]);
 
   return (
@@ -406,12 +401,12 @@ function App() {
 
         const x =
           (e.clientX - rect.left) /
-          rect.width -
+            rect.width -
           0.5;
 
         const y =
           (e.clientY - rect.top) /
-          rect.height -
+            rect.height -
           0.5;
 
         card.style.transform = `
@@ -449,8 +444,9 @@ function App() {
       ================================================= */}
 
       <div
-        className={`page-loader ${loading ? "loading" : "loaded"
-          }`}
+        className={`page-loader ${
+          loading ? "loading" : "loaded"
+        }`}
       >
         <div className="loader-top">
           <span>FA / 26</span>
@@ -541,8 +537,9 @@ function App() {
       ================================================= */}
 
       <div
-        className={`menu-overlay ${menuOpen ? "menu-open" : ""
-          }`}
+        className={`menu-overlay ${
+          menuOpen ? "menu-open" : ""
+        }`}
       >
         <div className="menu-number">
           NAVIGATION / 00
@@ -738,7 +735,7 @@ function App() {
             data-parallax="7"
           >
             <img
-              src={images.portrait}
+              src={images.aboutPortrait}
               alt="Portrait"
             />
 
@@ -800,10 +797,11 @@ function App() {
             (key) => (
               <button
                 key={key}
-                className={`identity-tab ${identity === key
-                  ? "selected"
-                  : ""
-                  }`}
+                className={`identity-tab ${
+                  identity === key
+                    ? "selected"
+                    : ""
+                }`}
                 onClick={() =>
                   setIdentity(key)
                 }
@@ -855,8 +853,9 @@ function App() {
                     <span
                       className="identity-line"
                       style={{
-                        "--line-delay": `${index * 90
-                          }ms`,
+                        "--line-delay": `${
+                          index * 90
+                        }ms`,
                       }}
                     >
                       {line}
@@ -878,8 +877,9 @@ function App() {
                   <span
                     key={tag}
                     style={{
-                      "--tag-delay": `${index * 70
-                        }ms`,
+                      "--tag-delay": `${
+                        index * 70
+                      }ms`,
                     }}
                   >
                     {tag}
@@ -915,66 +915,28 @@ function App() {
 
         <div className="numbers-grid">
 
-          {/* 24 CITIES */}
           <div className="number-item reveal">
-            <AnimatedCounter
-              end={24}
-              duration={1400}
-            />
-
+            <AnimatedCounter end={24} duration={1400} />
             <span>CITIES</span>
-
-            <p>
-              Travel / Shoots / Events
-            </p>
+            <p>Travel / Shoots / Events</p>
           </div>
 
-
-          {/* 680K YOUTUBE */}
           <div className="number-item reveal">
-            <AnimatedCounter
-              end={680}
-              suffix="K"
-              duration={1800}
-            />
-
+            <AnimatedCounter end={680} suffix="K" duration={1800} />
             <span>YOUTUBE</span>
-
-            <p>
-              Digital audience
-            </p>
+            <p>Digital audience</p>
           </div>
 
-
-          {/* 2.4M INSTAGRAM */}
           <div className="number-item reveal">
-            <AnimatedCounter
-              end={2.4}
-              suffix="M"
-              decimals={1}
-              duration={2000}
-            />
-
+            <AnimatedCounter end={2.4} suffix="M" decimals={1} duration={2000} />
             <span>INSTAGRAM</span>
-
-            <p>
-              Social community
-            </p>
+            <p>Social community</p>
           </div>
 
-
-          {/* 03 DISCIPLINES */}
           <div className="number-item reveal">
-            <AnimatedCounter
-              end={3}
-              duration={1200}
-            />
-
+            <AnimatedCounter end={3} duration={1200} />
             <span>DISCIPLINES</span>
-
-            <p>
-              Model / Actor / Creator
-            </p>
+            <p>Model / Actor / Creator</p>
           </div>
 
         </div>
@@ -1114,7 +1076,7 @@ function App() {
             </div>
 
             <img
-              src={images.lifestyle}
+              src={images.instagram}
               alt="Instagram"
             />
 
@@ -1145,7 +1107,7 @@ function App() {
             </div>
 
             <img
-              src={images.film}
+              src={images.youtube}
               alt="YouTube"
             />
 
@@ -1271,7 +1233,7 @@ function App() {
         <div className="process-image image-reveal">
 
           <img
-            src={images.camera}
+            src={images.process}
             alt="Camera"
           />
 
@@ -1414,7 +1376,7 @@ function App() {
       >
 
         <img
-          src={images.blackWhite}
+          src={images.contact}
           alt="Portrait"
         />
 
