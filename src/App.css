@@ -1,0 +1,2199 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap");
+
+:root {
+  --black: #0b0b0b;
+  --black-2: #121212;
+  --white: #f3f2ed;
+  --muted: #9c9c96;
+  --line: rgba(243, 242, 237, 0.14);
+  --lime: #c8ff3d;
+  --dark-lime: #9bc52c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.site {
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 78px;
+  padding: 0 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+  color: white;
+  mix-blend-mode: normal;
+}
+
+.logo {
+  background: none;
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  cursor: pointer;
+}
+
+.logo span {
+  color: var(--lime);
+}
+
+.topbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  opacity: 0.75;
+}
+
+.menu-button {
+  color: white;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 42px;
+  padding: 0 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #121212;
+  padding: 120px 7vw 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-number,
+.menu-footer {
+  color: #777;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  width: min(900px, 100%);
+}
+
+.menu-links button {
+  background: transparent;
+  color: white;
+  text-align: left;
+  border-bottom: 1px solid #292929;
+  padding: 15px 0;
+  cursor: pointer;
+  font-size: clamp(42px, 7vw, 100px);
+  font-weight: 700;
+  letter-spacing: -4px;
+  transition: 0.3s;
+}
+
+.menu-links button:hover {
+  color: var(--lime);
+  padding-left: 20px;
+}
+
+.menu-links button span {
+  display: inline-block;
+  width: 70px;
+  vertical-align: middle;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--lime);
+}
+
+.menu-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  height: 900px;
+  max-height: 1100px;
+  overflow: hidden;
+  background: #181818;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-background img {
+  object-position: center 20%;
+  filter: saturate(0.72) contrast(1.08);
+  transform: scale(1.01);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.08) 55%,
+      rgba(0, 0, 0, 0.4)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.8),
+      transparent 45%
+    );
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.08;
+  pointer-events: none;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+.hero-location,
+.hero-index,
+.hero-social,
+.hero-content,
+.hero-bottom,
+.hero-scroll {
+  position: absolute;
+  z-index: 5;
+}
+
+.hero-location {
+  top: 105px;
+  left: 4vw;
+  display: flex;
+  gap: 14px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.hero-index {
+  top: 105px;
+  right: 4vw;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.hero-index strong {
+  color: var(--lime);
+  font-size: 13px;
+}
+
+.hero-social {
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-social a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.3);
+  display: grid;
+  place-items: center;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  transition: 0.3s;
+}
+
+.hero-social a:hover {
+  background: var(--lime);
+  color: black;
+  border-color: var(--lime);
+}
+
+.hero-content {
+  left: 8vw;
+  bottom: 15%;
+}
+
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 14px var(--lime);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(80px, 15vw, 220px);
+  line-height: 0.77;
+  letter-spacing: -10px;
+  font-weight: 800;
+}
+
+.hero h1 span {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,.8);
+}
+
+.hero-description {
+  margin-top: 42px;
+  display: flex;
+  align-items: flex-end;
+  gap: 60px;
+}
+
+.hero-description p {
+  margin: 0;
+  font-family: "DM Mono", monospace;
+  color: #c7c7c2;
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: 0.7px;
+}
+
+.hero-description button {
+  background: var(--lime);
+  color: black;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  cursor: pointer;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.hero-description button:hover {
+  transform: translateX(7px);
+}
+
+.hero-bottom {
+  left: 4vw;
+  right: 4vw;
+  bottom: 35px;
+  border-top: 1px solid rgba(255,255,255,.25);
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  color: #bbb;
+}
+
+.hero-scroll {
+  right: 4vw;
+  bottom: 31px;
+  transform: rotate(-90deg) translateX(100%);
+  transform-origin: right bottom;
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* =====================================================
+   COMMON
+===================================================== */
+
+.section-label {
+  display: flex;
+  gap: 15px;
+  color: #767671;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.section-label span:first-child {
+  color: var(--lime);
+}
+
+.light-label {
+  color: #777;
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+  position: relative;
+  padding: 130px 7vw 150px;
+  background: var(--white);
+  color: var(--black);
+}
+
+.intro .section-label span:first-child {
+  color: #6c8b17;
+}
+
+.intro-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 9vw;
+  margin-top: 90px;
+}
+
+.intro-title .small-label {
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #777;
+}
+
+.intro-title h2 {
+  margin: 25px 0 0;
+  font-size: clamp(55px, 8vw, 120px);
+  line-height: 0.88;
+  letter-spacing: -5px;
+}
+
+.intro-title h2 i,
+.work-header h2 i,
+.story-heading h2 i,
+.brands-title h2 i,
+.identity-copy h2 i,
+.process-copy h2 i,
+.contact-content h2 i {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+}
+
+.intro-copy {
+  padding-top: 55px;
+  max-width: 520px;
+}
+
+.intro-lead {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.7px;
+}
+
+.intro-copy > p:not(.intro-lead) {
+  margin-top: 35px;
+  color: #686863;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.intro-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #ccc;
+  margin-top: 45px;
+}
+
+.intro-details div {
+  padding: 20px 10px 0 0;
+}
+
+.intro-details span,
+.intro-details strong {
+  display: block;
+}
+
+.intro-details span {
+  color: #888;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.intro-details strong {
+  font-size: 11px;
+}
+
+.intro-visual {
+  position: relative;
+  margin-top: 100px;
+  min-height: 650px;
+}
+
+.intro-image-main {
+  width: 58%;
+  height: 610px;
+  position: absolute;
+  left: 13%;
+  top: 0;
+}
+
+.intro-image-main img {
+  filter: grayscale(100%);
+}
+
+.image-corner {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: white;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+}
+
+.intro-image-small {
+  position: absolute;
+  width: 28%;
+  height: 250px;
+  right: 2%;
+  bottom: 0;
+}
+
+.intro-image-small img {
+  filter: grayscale(100%);
+}
+
+.intro-image-small span {
+  position: absolute;
+  bottom: -24px;
+  left: 0;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  color: #777;
+}
+
+.intro-stamp {
+  position: absolute;
+  left: 0;
+  bottom: 100px;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #222;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  line-height: 1.1;
+}
+
+/* =====================================================
+   IDENTITY
+===================================================== */
+
+.identity-section {
+  padding: 120px 7vw;
+  background: var(--black-2);
+}
+
+.identity-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.identity-top p {
+  margin: 0;
+  color: #858580;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.identity-selector {
+  margin-top: 70px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.identity-selector button {
+  position: relative;
+  background: transparent;
+  color: #666;
+  min-height: 95px;
+  padding: 15px 20px;
+  border-right: 1px solid var(--line);
+  text-align: left;
+  cursor: pointer;
+  transition: 0.35s;
+}
+
+.identity-selector button:last-child {
+  border-right: 0;
+}
+
+.identity-selector button span {
+  display: block;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.identity-selector button strong {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.identity-selector button svg {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+}
+
+.identity-selector button.selected {
+  background: var(--lime);
+  color: black;
+}
+
+.identity-selector button.selected strong {
+  color: black;
+}
+
+.identity-stage {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  min-height: 680px;
+  margin-top: 70px;
+}
+
+.identity-photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.identity-photo img {
+  animation: identityIn .5s ease;
+  filter: grayscale(15%);
+}
+
+@keyframes identityIn {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.photo-number {
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  background: black;
+  color: white;
+  padding: 10px;
+}
+
+.identity-copy {
+  position: relative;
+  background: #191919;
+  padding: 80px 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.identity-label {
+  color: var(--lime);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.identity-copy h2 {
+  margin: 25px 0;
+  font-size: clamp(50px, 6vw, 95px);
+  line-height: .82;
+  letter-spacing: -4px;
+}
+
+.identity-copy p {
+  max-width: 410px;
+  color: #898984;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.identity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.identity-tags span {
+  border: 1px solid #333;
+  padding: 8px 11px;
+  color: #aaa;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+}
+
+.circle-link {
+  margin-top: 50px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: black;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.circle-link:hover {
+  transform: rotate(45deg);
+}
+
+/* =====================================================
+   NUMBERS
+===================================================== */
+
+.numbers {
+  background: var(--lime);
+  color: black;
+  padding: 95px 7vw 105px;
+}
+
+.numbers .section-label span:first-child {
+  color: black;
+}
+
+.numbers-grid {
+  margin-top: 75px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.number-item {
+  padding: 0 25px;
+  border-right: 1px solid rgba(0,0,0,.2);
+}
+
+.number-item:first-child {
+  padding-left: 0;
+}
+
+.number-item:last-child {
+  border: 0;
+}
+
+.number-item strong {
+  display: block;
+  font-size: clamp(42px, 5vw, 80px);
+  letter-spacing: -4px;
+}
+
+.number-item span {
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+}
+
+.number-item p {
+  color: #596e20;
+  font-size: 11px;
+}
+
+/* =====================================================
+   WORK
+===================================================== */
+
+.work-section {
+  padding: 130px 7vw 160px;
+  background: var(--white);
+  color: black;
+}
+
+.work-section .section-label span:first-child {
+  color: #6c8b17;
+}
+
+.work-header {
+  display: grid;
+  grid-template-columns: .6fr 1fr .6fr;
+  align-items: end;
+  gap: 30px;
+  margin-bottom: 100px;
+}
+
+.work-header h2 {
+  margin: 0;
+  font-size: clamp(60px, 9vw, 130px);
+  line-height: .8;
+  letter-spacing: -6px;
+}
+
+.work-header p {
+  max-width: 240px;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.7;
+  justify-self: end;
+}
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 110px;
+}
+
+.work-item {
+  width: 78%;
+}
+
+.work-item:nth-child(even) {
+  margin-left: auto;
+}
+
+.work-image {
+  height: min(65vw, 720px);
+  position: relative;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.work-image img {
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.work-item:hover .work-image img {
+  transform: scale(1.045);
+}
+
+.work-image-overlay {
+  position: absolute;
+  inset: auto 20px 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transition: .3s;
+}
+
+.work-item:hover .work-image-overlay {
+  opacity: 1;
+}
+
+.work-image-overlay span {
+  background: var(--lime);
+  color: black;
+  padding: 10px 13px;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+}
+
+.work-image-overlay svg {
+  background: white;
+  color: black;
+  padding: 11px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.work-meta {
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  gap: 20px;
+  padding-top: 17px;
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 20px;
+}
+
+.work-meta > span {
+  font-family: "DM Mono", monospace;
+  color: #777;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.work-meta > span:last-child {
+  text-align: right;
+}
+
+.work-meta div > span {
+  color: #888;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.work-meta h3 {
+  margin: 7px 0 0;
+  font-size: 26px;
+  letter-spacing: -1px;
+}
+
+/* =====================================================
+   SOCIAL
+===================================================== */
+
+.social-section {
+  padding: 130px 7vw;
+  background: #101010;
+}
+
+.social-heading {
+  display: grid;
+  grid-template-columns: .7fr 1fr .6fr;
+  align-items: end;
+  margin-bottom: 85px;
+}
+
+.social-heading h2 {
+  margin: 0;
+  font-size: clamp(70px, 11vw, 160px);
+  line-height: .75;
+  letter-spacing: -8px;
+}
+
+.social-heading p {
+  color: #777;
+  font-size: 12px;
+  justify-self: end;
+}
+
+.social-platforms {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr .7fr;
+  min-height: 620px;
+}
+
+.platform-card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  transition: .4s;
+}
+
+.platform-card:hover {
+  transform: translateY(-10px);
+}
+
+.platform-card img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transition: transform .8s;
+}
+
+.platform-card:hover img {
+  transform: scale(1.05);
+}
+
+.platform-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.65),
+    transparent 35%,
+    rgba(0,0,0,.7)
+  );
+}
+
+.platform-card.instagram {
+  background: #bc9c84;
+}
+
+.platform-card.youtube {
+  background: #1d1d1d;
+}
+
+.platform-card.facebook {
+  background: var(--lime);
+  color: black;
+}
+
+.platform-top,
+.platform-content,
+.platform-handle,
+.play-button,
+.facebook-copy {
+  position: relative;
+  z-index: 3;
+}
+
+.platform-top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.platform-top svg {
+  margin-left: auto;
+}
+
+.platform-symbol {
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgba(255,255,255,.5);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.facebook .platform-symbol {
+  border-color: rgba(0,0,0,.4);
+}
+
+.platform-content {
+  position: absolute;
+  left: 22px;
+  bottom: 28px;
+}
+
+.platform-content strong,
+.facebook-copy strong {
+  display: block;
+  font-size: clamp(50px, 6vw, 90px);
+  line-height: .8;
+  letter-spacing: -4px;
+}
+
+.platform-content span,
+.facebook-copy > span {
+  display: block;
+  margin-top: 12px;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.platform-handle {
+  position: absolute;
+  right: 22px;
+  bottom: 28px;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+}
+
+.play-button {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  width: 58px;
+  height: 58px;
+  background: var(--lime);
+  color: black;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.facebook-copy {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.facebook-copy > div {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,.3);
+  margin: 28px 0;
+}
+
+.facebook-copy p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+  font-family: "DM Mono", monospace;
+}
+
+.social-bottom {
+  border-top: 1px solid var(--line);
+  margin-top: 45px;
+  padding-top: 18px;
+  display: flex;
+  gap: 20px;
+  color: #777;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* =====================================================
+   STORY
+===================================================== */
+
+.story-section {
+  padding: 140px 7vw;
+  background: var(--white);
+  color: black;
+}
+
+.story-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 90px;
+}
+
+.story-heading h2 {
+  margin: 0;
+  font-size: clamp(65px, 9vw, 135px);
+  line-height: .77;
+  letter-spacing: -6px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .55fr;
+  grid-template-rows: 440px 300px;
+  gap: 20px;
+}
+
+.story-grid > div {
+  position: relative;
+  overflow: hidden;
+}
+
+.story-large {
+  grid-row: span 2;
+}
+
+.story-tall {
+  height: 440px;
+}
+
+.story-small {
+  width: 65%;
+  justify-self: end;
+}
+
+.story-wide {
+  width: 65%;
+}
+
+.story-grid > div > span {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  color: white;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.story-grid > div > div {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.story-grid img {
+  transition: .7s;
+}
+
+.story-grid > div:hover img {
+  transform: scale(1.05);
+}
+
+/* =====================================================
+   PROCESS
+===================================================== */
+
+.process-section {
+  min-height: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #171717;
+}
+
+.process-image {
+  position: relative;
+}
+
+.process-image img {
+  filter: grayscale(100%);
+}
+
+.process-image-label {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.process-copy {
+  padding: 100px 8vw;
+}
+
+.process-copy h2 {
+  margin: 80px 0;
+  font-size: clamp(55px, 6vw, 90px);
+  line-height: .82;
+  letter-spacing: -4px;
+}
+
+.process-steps {
+  border-top: 1px solid var(--line);
+}
+
+.process-steps div {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+}
+
+.process-steps span {
+  color: var(--lime);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+}
+
+.process-steps strong {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+
+
+
+
+
+/* =====================================================
+   COLLABORATIONS — NEW DESIGN
+===================================================== */
+
+.brands-section {
+  position: relative;
+  background: #f2f1ec;
+  color: #0a0a0a;
+  padding: 115px 7vw 90px;
+  overflow: hidden;
+}
+
+.brands-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #c9c8c2;
+  padding-bottom: 18px;
+
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #777;
+}
+
+.brands-topline span:first-child {
+  color: #6f8d19;
+}
+
+.brands-intro {
+  position: relative;
+  margin-top: 85px;
+  max-width: 900px;
+}
+
+.brands-kicker {
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #777;
+  margin-bottom: 24px;
+}
+
+.brands-intro h2 {
+  margin: 0;
+
+  font-size: clamp(80px, 12vw, 180px);
+  line-height: .78;
+  letter-spacing: -8px;
+  font-weight: 800;
+
+  white-space: normal;
+  overflow-wrap: normal;
+}
+
+.brands-intro h2 i {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  letter-spacing: -7px;
+}
+
+.brands-intro p {
+  margin: 42px 0 0;
+  max-width: 330px;
+
+  color: #74736d;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* brand cards */
+
+.brand-showcase {
+  margin-top: 100px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+}
+
+.brand-feature {
+  position: relative;
+
+  min-height: 260px;
+  padding: 22px;
+
+  border-right: 1px solid #bbb;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  transition:
+    background .3s ease,
+    color .3s ease,
+    transform .3s ease;
+
+  cursor: pointer;
+}
+
+.brand-feature:last-child {
+  border-right: 0;
+}
+
+.brand-feature:hover {
+  background: #c8ff3d;
+  transform: translateY(-8px);
+}
+
+.brand-feature > span {
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  color: #777;
+}
+
+.brand-feature strong {
+  font-size: clamp(22px, 2.5vw, 34px);
+  letter-spacing: -1.5px;
+}
+
+.brand-feature small {
+  font-family: "DM Mono", monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: #777;
+}
+
+/* bottom */
+
+.brands-bottom {
+  margin-top: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brands-note span,
+.brands-note strong {
+  display: block;
+}
+
+.brands-note span {
+  font-family: "DM Mono", monospace;
+  color: #777;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.brands-note strong {
+  margin-top: 7px;
+  font-size: 13px;
+}
+
+.brands-arrow {
+  width: 52px;
+  height: 52px;
+
+  border: 1px solid #222;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  transition: .3s;
+}
+
+.brands-bottom:hover .brands-arrow {
+  background: #c8ff3d;
+  transform: rotate(45deg);
+}
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.contact-section {
+  min-height: 100svh;
+  height: 900px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section > img {
+  position: absolute;
+  inset: 0;
+  filter: grayscale(100%);
+  object-position: center;
+}
+
+.contact-dark {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.85),
+      rgba(0,0,0,.2)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0,0,0,.8),
+      transparent 50%
+    );
+}
+
+.contact-number {
+  position: absolute;
+  top: 100px;
+  right: 7vw;
+  color: var(--lime);
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+}
+
+.contact-content {
+  position: absolute;
+  left: 8vw;
+  top: 50%;
+  transform: translateY(-45%);
+}
+
+.contact-content > span {
+  color: var(--lime);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.contact-content h2 {
+  margin: 30px 0 45px;
+  font-size: clamp(65px, 10vw, 150px);
+  line-height: .77;
+  letter-spacing: -7px;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  border-bottom: 1px solid rgba(255,255,255,.5);
+  padding-bottom: 12px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  transition: .3s;
+}
+
+.contact-link:hover {
+  color: var(--lime);
+  gap: 55px;
+}
+
+.contact-footer {
+  position: absolute;
+  left: 4vw;
+  right: 4vw;
+  bottom: 30px;
+  padding-top: 17px;
+  border-top: 1px solid rgba(255,255,255,.25);
+  display: flex;
+  justify-content: space-between;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #aaa;
+}
+
+.contact-footer div {
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.contact-footer div span {
+  color: var(--lime);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .topbar-center {
+    display: none;
+  }
+
+  .hero {
+    height: 850px;
+  }
+
+  .hero-background img {
+    object-position: 58% center;
+  }
+
+  .hero-content {
+    left: 7vw;
+    bottom: 18%;
+  }
+
+  .hero h1 {
+    font-size: clamp(75px, 20vw, 150px);
+    letter-spacing: -7px;
+  }
+
+  .hero-social {
+    right: 20px;
+  }
+
+  .intro-layout,
+  .identity-stage,
+  .process-section {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-copy {
+    padding-top: 0;
+  }
+
+  .intro-visual {
+    margin-top: 80px;
+  }
+
+  .identity-photo {
+    height: 600px;
+  }
+
+  .identity-copy {
+    min-height: 550px;
+  }
+
+  .numbers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 0;
+  }
+
+  .number-item:nth-child(2) {
+    border-right: 0;
+  }
+
+  .number-item:nth-child(3) {
+    padding-left: 0;
+  }
+
+  .work-header,
+  .social-heading {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .work-header p,
+  .social-heading p {
+    justify-self: start;
+  }
+
+  .social-platforms {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-card {
+    min-height: 500px;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 500px 300px 300px;
+  }
+
+  .story-large {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+
+  .story-tall {
+    height: auto;
+  }
+
+  .story-small,
+  .story-wide {
+    width: 100%;
+  }
+
+  .process-image {
+    height: 600px;
+  }
+
+  .brands-title {
+    display: block;
+  }
+
+  .brands-title p {
+    margin-top: 30px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .topbar {
+    height: 68px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .menu-button {
+    height: 38px;
+    padding: 0 11px;
+  }
+
+  .hero {
+    height: 760px;
+    min-height: 760px;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.15)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0,0,0,.9),
+        transparent 55%
+      );
+  }
+
+  .hero-background img {
+    object-position: 60% center;
+  }
+
+  .hero-location {
+    top: 88px;
+    left: 20px;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 7px;
+  }
+
+  .hero-index {
+    top: 88px;
+    right: 20px;
+    font-size: 7px;
+  }
+
+  .hero-social {
+    top: auto;
+    bottom: 125px;
+    right: 20px;
+    transform: none;
+  }
+
+  .hero-social a {
+    width: 32px;
+    height: 32px;
+    font-size: 8px;
+  }
+
+  .hero-content {
+    left: 20px;
+    right: 20px;
+    bottom: 150px;
+  }
+
+  .hero-kicker {
+    font-size: 7px;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(68px, 22vw, 115px);
+    letter-spacing: -5px;
+    line-height: .8;
+  }
+
+  .hero-description {
+    margin-top: 28px;
+    display: block;
+  }
+
+  .hero-description p {
+    font-size: 8px;
+    margin-bottom: 20px;
+  }
+
+  .hero-description button {
+    width: max-content;
+    padding: 12px 13px;
+    font-size: 7px;
+  }
+
+  .hero-bottom {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    gap: 10px;
+    font-size: 6px;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+
+  .intro,
+  .identity-section,
+  .work-section,
+  .social-section,
+  .story-section {
+    padding: 85px 20px;
+  }
+
+  .intro-layout {
+    margin-top: 60px;
+    gap: 50px;
+  }
+
+  .intro-title h2 {
+    font-size: clamp(52px, 16vw, 80px);
+    letter-spacing: -3px;
+  }
+
+  .intro-lead {
+    font-size: 20px;
+  }
+
+  .intro-copy > p:not(.intro-lead) {
+    font-size: 12px;
+  }
+
+  .intro-details {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 0;
+  }
+
+  .intro-details div {
+    padding-top: 15px;
+  }
+
+  .intro-visual {
+    min-height: 520px;
+    margin-top: 35px;
+  }
+
+  .intro-image-main {
+    width: 72%;
+    height: 480px;
+    left: 0;
+  }
+
+  .intro-image-small {
+    width: 42%;
+    height: 180px;
+    right: 0;
+  }
+
+  .intro-stamp {
+    width: 62px;
+    height: 62px;
+    bottom: 85px;
+    left: auto;
+    right: 25%;
+    font-size: 9px;
+  }
+
+  .identity-top {
+    display: block;
+  }
+
+  .identity-top p {
+    margin-top: 30px;
+  }
+
+  .identity-selector {
+    grid-template-columns: 1fr;
+    margin-top: 45px;
+  }
+
+  .identity-selector button {
+    min-height: 75px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .identity-selector button:last-child {
+    border-bottom: 0;
+  }
+
+  .identity-stage {
+    margin-top: 35px;
+  }
+
+  .identity-photo {
+    height: 470px;
+  }
+
+  .identity-copy {
+    min-height: 500px;
+    padding: 55px 30px;
+  }
+
+  .identity-copy h2 {
+    font-size: 58px;
+    letter-spacing: -3px;
+  }
+
+  .circle-link {
+    margin-top: 35px;
+  }
+
+  .numbers {
+    padding: 75px 20px;
+  }
+
+  .numbers-grid {
+    margin-top: 50px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 0;
+  }
+
+  .number-item {
+    padding: 0 15px;
+  }
+
+  .number-item strong {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+
+  .number-item p {
+    font-size: 9px;
+  }
+
+  .work-header {
+    margin-bottom: 60px;
+  }
+
+  .work-header h2 {
+    font-size: 65px;
+    letter-spacing: -4px;
+  }
+
+  .work-list {
+    gap: 65px;
+  }
+
+  .work-item {
+    width: 100%;
+  }
+
+  .work-image {
+    height: 115vw;
+  }
+
+  .work-meta {
+    grid-template-columns: 35px 1fr 40px;
+  }
+
+  .work-meta h3 {
+    font-size: 20px;
+  }
+
+  .work-image-overlay {
+    opacity: 1;
+  }
+
+  .social-heading {
+    margin-bottom: 55px;
+  }
+
+  .social-heading h2 {
+    font-size: 85px;
+    letter-spacing: -5px;
+  }
+
+  .platform-card {
+    min-height: 470px;
+  }
+
+  .platform-content strong,
+  .facebook-copy strong {
+    font-size: 62px;
+  }
+
+  .social-bottom {
+    flex-wrap: wrap;
+    line-height: 1.5;
+  }
+
+  .story-heading {
+    display: block;
+    margin-bottom: 55px;
+  }
+
+  .story-heading h2 {
+    margin-top: 55px;
+    font-size: 68px;
+    letter-spacing: -4px;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 460px 300px 300px 300px;
+    gap: 15px;
+  }
+
+  .story-large {
+    grid-column: auto;
+  }
+
+  .story-small,
+  .story-wide {
+    width: 100%;
+  }
+
+  .process-section {
+    display: block;
+  }
+
+  .process-image {
+    height: 480px;
+  }
+
+  .process-copy {
+    padding: 80px 20px;
+  }
+
+  .process-copy h2 {
+    margin: 55px 0;
+    font-size: 60px;
+    letter-spacing: -3px;
+  }
+
+  .contact-section {
+    height: 760px;
+    min-height: 760px;
+  }
+
+  .contact-section > img {
+    object-position: 55% center;
+  }
+
+  .contact-content {
+    left: 20px;
+    right: 20px;
+    top: 46%;
+  }
+
+  .contact-content h2 {
+    margin: 25px 0 35px;
+    font-size: 64px;
+    letter-spacing: -4px;
+  }
+
+  .contact-link {
+    gap: 25px;
+    font-size: 7px;
+  }
+
+  .contact-footer {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    gap: 12px;
+    font-size: 6px;
+  }
+
+  .contact-footer div {
+    font-size: 15px;
+  }
+
+  .contact-footer span:nth-child(2) {
+    display: none;
+  }
+
+  .menu-overlay {
+    padding: 100px 20px 30px;
+  }
+
+  .menu-links button {
+    font-size: 48px;
+    letter-spacing: -3px;
+  }
+
+  .menu-links button span {
+    width: 42px;
+    font-size: 8px;
+  }
+
+  .menu-footer {
+    font-size: 7px;
+  }
+  
+  .brands-section {
+    padding: 75px 20px 65px;
+  }
+
+  .brands-topline {
+    font-size: 7px;
+    letter-spacing: 1px;
+    padding-bottom: 14px;
+  }
+
+  .brands-intro {
+    margin-top: 58px;
+  }
+
+  .brands-kicker {
+    font-size: 7px;
+    margin-bottom: 22px;
+  }
+
+  .brands-intro h2 {
+    /*
+      IMPORTANT:
+      No giant desktop heading on mobile.
+    */
+
+    font-size: clamp(64px, 19vw, 94px);
+    line-height: .78;
+
+    letter-spacing: -4px;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .brands-intro h2 i {
+    font-size: .92em;
+    letter-spacing: -3px;
+  }
+
+  .brands-intro p {
+    margin-top: 30px;
+
+    max-width: 270px;
+
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  /* -------------------------
+     MOBILE BRAND LIST
+  ------------------------- */
+
+  .brand-showcase {
+    margin-top: 65px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-top: 1px solid #bbb;
+    border-bottom: 0;
+  }
+
+  .brand-feature {
+    min-height: 0;
+
+    height: 110px;
+
+    padding: 18px 0;
+
+    border-right: 0;
+    border-bottom: 1px solid #bbb;
+
+    display: grid;
+    grid-template-columns: 35px 1fr auto;
+
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-feature:last-child {
+    border-bottom: 1px solid #bbb;
+  }
+
+  .brand-feature:hover {
+    transform: none;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .brand-feature > span {
+    font-size: 8px;
+  }
+
+  .brand-feature strong {
+    font-size: 23px;
+    letter-spacing: -1px;
+  }
+
+  .brand-feature small {
+    font-size: 6px;
+    text-align: right;
+    max-width: 90px;
+    line-height: 1.5;
+  }
+
+  .brands-bottom {
+    margin-top: 28px;
+  }
+
+  .brands-note span {
+    font-size: 7px;
+  }
+
+  .brands-note strong {
+    font-size: 11px;
+  }
+
+  .brands-arrow {
+    width: 45px;
+    height: 45px;
+  }
+}
